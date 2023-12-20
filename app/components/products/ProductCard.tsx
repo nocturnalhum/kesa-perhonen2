@@ -1,11 +1,10 @@
 'use client';
 
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { formatPrice } from '@/utils/formatPrice';
 import { truncateText } from '@/utils/truncateText';
-import Image from 'next/image';
-import React from 'react';
 import { Rating } from '@mui/material';
-import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   data: any;

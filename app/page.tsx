@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className='p-8'>
+    <div className='py-4 tablet:p-8'>
       <Container>
         <div>
           <HeroBanner />

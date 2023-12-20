@@ -68,7 +68,7 @@ const NavBar = () => {
 
             {/* =====<<< SHOPPING CART >>>======================================= */}
             <div className='flex'>
-              <Link href='' className='cursor-pointer'>
+              <Link href='/cart' className='cursor-pointer'>
                 Cart
               </Link>
               <div className='ml-3'>User</div>
