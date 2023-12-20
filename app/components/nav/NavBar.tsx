@@ -6,10 +6,12 @@ import { GoChevronDown } from 'react-icons/go';
 import { CiMenuBurger } from 'react-icons/ci';
 import { IoSearchOutline } from 'react-icons/io5';
 import Container from '../Container';
-import { categories } from '@/utils/categories';
 import Categories from './Categories';
 
-const noto = Noto_Serif_JP({ subsets: ['latin'], weight: ['600'] });
+const noto = Noto_Serif_JP({
+  subsets: [],
+  weight: ['600'],
+});
 
 const NavBar = () => {
   return (
@@ -66,7 +68,7 @@ const NavBar = () => {
 
             {/* =====<<< SHOPPING CART >>>======================================= */}
             <div className='flex'>
-              <Link href='/cart' className='cursor-pointer'>
+              <Link href='' className='cursor-pointer'>
                 Cart
               </Link>
               <div className='ml-3'>User</div>

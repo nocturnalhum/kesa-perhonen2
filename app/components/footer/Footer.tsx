@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer className='bg-slate-700 text-slate-200 text-sm'>
       <Container>
-        <div className='flex flex-col laptop:flex-row justify-evenly pt-16 pb-8'>
+        <div className='flex flex-col laptop:flex-row justify-evenly p-6 pt-10'>
           <FooterList>
             <h3 className='text-base font-bold'>Shop Categories</h3>
             {categories.map((item) => {
@@ -44,8 +44,8 @@ const Footer = () => {
             </p>
           </div>
           <FooterList>
-            <h3 className='text-base font-bold mb-2'>Follow Us</h3>
-            <div className='flex gap-2'>
+            <h3 className='text-base font-bold mb-2 laptop:ml-6'>Follow Us</h3>
+            <div className='flex gap-2 laptop:ml-6'>
               <Link href='#'>
                 <MdFacebook size={24} />
               </Link>
