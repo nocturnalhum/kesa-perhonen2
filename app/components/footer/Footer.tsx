@@ -7,20 +7,22 @@ import {
   AiFillYoutube,
 } from 'react-icons/ai';
 import Container from '../Container';
+import { categories } from '@/utils/categories';
 
 const Footer = () => {
   return (
     <footer className='bg-slate-700 text-slate-200 text-sm'>
       <Container>
-        <div className='flex flex-col laptop:flex-row justify-between pt-16 pb-8'>
+        <div className='flex flex-col laptop:flex-row justify-evenly pt-16 pb-8'>
           <FooterList>
             <h3 className='text-base font-bold'>Shop Categories</h3>
-            <Link href='#'>Gifts</Link>
-            <Link href='#'>Fashion</Link>
-            <Link href='#'>Lifestyle</Link>
-            <Link href='#'>{`Men's`}</Link>
-            <Link href='#'>{`Women's`}</Link>
-            <Link href='#'>Accessories</Link>
+            {categories.map((item) => {
+              return (
+                <Link href={item.link} key={item.id} className='capitalize'>
+                  {item.category}
+                </Link>
+              );
+            })}
           </FooterList>
           <FooterList>
             <h3 className='text-base font-bold'>Customer Service</h3>
@@ -31,12 +33,12 @@ const Footer = () => {
           </FooterList>
           <div className='w-full laptop:w-1/3 mb-6 laptop:mb-0'>
             <h3 className='text-base font-bold mb-2'>About Us</h3>
-            <p className='mb-2'>
+            <p className='mb-2 text-justify tablet:max-w-[90%] laptop:max-w-72 desktop:max-w-[450px]'>
               At kesä perhonen, we are dedicated to providing timeless style and
               quality to our customers, with a wide selection of gifts,
               clothing, home goods, and accessories
             </p>
-            <p>
+            <p className='mt-8'>
               &copy; {new Date().getFullYear()} kesä perhonen. All rights
               reserved.
             </p>
