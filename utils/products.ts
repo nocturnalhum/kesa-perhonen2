@@ -9,7 +9,7 @@ export const products = [
       {
         color: 'sand beige',
         colorCode: '#e2e1e1',
-        sizes: [{ size: 'os', price: 19.9, inventory: 10 }],
+        sizes: [{ size: 'os', price: 19.9, discount: 0.8, inventory: 10 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sand_700.jpg',
@@ -17,7 +17,7 @@ export const products = [
       {
         color: 'gray',
         colorCode: '#7a7c7c',
-        sizes: [{ size: 'os', price: 19.9, inventory: 0 }],
+        sizes: [{ size: 'os', price: 19.9, discount: 1, inventory: 0 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/gray_700.jpg',
@@ -25,7 +25,7 @@ export const products = [
       {
         color: 'smokey green',
         colorCode: '#6b8e8a',
-        sizes: [{ size: 'os', price: 19.9, inventory: 12 }],
+        sizes: [{ size: 'os', price: 19.9, discount: 0.8, inventory: 12 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/green_700.jpg',
@@ -33,7 +33,7 @@ export const products = [
       {
         color: 'dark mustard',
         colorCode: '#c4841e',
-        sizes: [{ size: 'os', price: 19.9, inventory: 5 }],
+        sizes: [{ size: 'os', price: 19.9, discount: 0.8, inventory: 5 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/mustard_700.jpg',
@@ -41,7 +41,7 @@ export const products = [
       {
         color: 'black',
         colorCode: '#000000',
-        sizes: [{ size: 'os', price: 19.9, inventory: 2 }],
+        sizes: [{ size: 'os', price: 19.9, discount: 0.8, inventory: 2 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/black_700.jpg',
@@ -60,11 +60,11 @@ export const products = [
         color: 'natural',
         colorCode: '#f7f3e3 ',
         sizes: [
-          { size: 'xs', price: 99.9, inventory: 2 },
-          { size: 's', price: 99.9, inventory: 21 },
-          { size: 'm', price: 99.9, inventory: 12 },
-          { size: 'lg', price: 99.9, inventory: 2 },
-          { size: 'xl', price: 99.9, inventory: 22 },
+          { size: 'xs', price: 99.9, discount: 0.8, inventory: 2 },
+          { size: 's', price: 99.9, discount: 0.8, inventory: 21 },
+          { size: 'm', price: 99.9, discount: 0.8, inventory: 12 },
+          { size: 'l', price: 99.9, discount: 0.8, inventory: 2 },
+          { size: 'xl', price: 99.9, discount: 0.8, inventory: 22 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sweater_white_700.jpg',
@@ -73,11 +73,11 @@ export const products = [
         color: 'gray',
         colorCode: '#a3a2a0',
         sizes: [
-          { size: 'xs', price: 99.9, inventory: 5 },
-          { size: 's', price: 99.9, inventory: 3 },
-          { size: 'm', price: 99.9, inventory: 2 },
-          { size: 'lg', price: 99.9, inventory: 6 },
-          { size: 'xl', price: 99.9, inventory: 12 },
+          { size: 'xs', price: 99.9, discount: 0.8, inventory: 5 },
+          { size: 's', price: 99.9, discount: 0.8, inventory: 3 },
+          { size: 'm', price: 99.9, discount: 0.8, inventory: 2 },
+          { size: 'l', price: 99.9, discount: 0.8, inventory: 6 },
+          { size: 'xl', price: 99.9, discount: 0.8, inventory: 12 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sweater_gray_700.jpg',
@@ -86,11 +86,11 @@ export const products = [
         color: 'black',
         colorCode: '#000000',
         sizes: [
-          { size: 'xs', price: 99.9, inventory: 7 },
-          { size: 's', price: 99.9, inventory: 11 },
-          { size: 'm', price: 99.9, inventory: 2 },
-          { size: 'lg', price: 99.9, inventory: 22 },
-          { size: 'xl', price: 99.9, inventory: 12 },
+          { size: 'xs', price: 99.9, discount: 1, inventory: 7 },
+          { size: 's', price: 99.9, discount: 1, inventory: 11 },
+          { size: 'm', price: 99.9, discount: 0.5, inventory: 2 },
+          { size: 'l', price: 99.9, discount: 1, inventory: 22 },
+          { size: 'xl', price: 99.9, discount: 1, inventory: 12 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sweater_black_700.jpg',
@@ -151,11 +151,11 @@ export const products = [
         color: 'Gray',
         colorCode: '#a3a2a0',
         sizes: [
-          { size: 'xs', price: 49.9, inventory: 2 },
-          { size: 's', price: 49.9, inventory: 6 },
-          { size: 'm', price: 49.9, inventory: 5 },
-          { size: 'lg', price: 49.9, inventory: 11 },
-          { size: 'xl', price: 49.9, inventory: 16 },
+          { size: 'xs', price: 49.9, discount: 1, inventory: 2 },
+          { size: 's', price: 49.9, discount: 1, inventory: 6 },
+          { size: 'm', price: 49.9, discount: 1, inventory: 5 },
+          { size: 'l', price: 49.9, discount: 1, inventory: 11 },
+          { size: 'xl', price: 49.9, discount: 1, inventory: 16 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/cardigan_gray.jpg',
@@ -164,11 +164,11 @@ export const products = [
         color: 'Blue',
         colorCode: '#243c6d',
         sizes: [
-          { size: 'xs', price: 49.9, inventory: 0 },
-          { size: 's', price: 49.9, inventory: 1 },
-          { size: 'm', price: 49.9, inventory: 5 },
-          { size: 'lg', price: 49.9, inventory: 12 },
-          { size: 'xl', price: 49.9, inventory: 7 },
+          { size: 'xs', price: 49.9, discount: 1, inventory: 0 },
+          { size: 's', price: 49.9, discount: 1, inventory: 1 },
+          { size: 'm', price: 49.9, discount: 1, inventory: 5 },
+          { size: 'l', price: 49.9, discount: 1, inventory: 12 },
+          { size: 'xl', price: 49.9, discount: 1, inventory: 7 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/cardigan_blue.jpg',
@@ -177,11 +177,11 @@ export const products = [
         color: 'Red',
         colorCode: '#900C3F',
         sizes: [
-          { size: 'xs', price: 49.9, inventory: 2 },
-          { size: 's', price: 49.9, inventory: 3 },
-          { size: 'm', price: 49.9, inventory: 7 },
-          { size: 'lg', price: 49.9, inventory: 6 },
-          { size: 'xl', price: 49.9, inventory: 15 },
+          { size: 'xs', price: 49.9, discount: 1, inventory: 2 },
+          { size: 's', price: 49.9, discount: 1, inventory: 3 },
+          { size: 'm', price: 49.9, discount: 1, inventory: 7 },
+          { size: 'l', price: 49.9, discount: 1, inventory: 6 },
+          { size: 'xl', price: 49.9, discount: 1, inventory: 15 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/cardigan_red.jpg',
@@ -244,9 +244,9 @@ export const products = [
         color: 'Natural',
         colorCode: ' #ffffff',
         sizes: [
-          { size: 's', price: 29.9, inventory: 21 },
-          { size: 'm', price: 39.9, inventory: 12 },
-          { size: 'lg', price: 59.9, inventory: 2 },
+          { size: 's', price: 29.9, discount: 1, inventory: 21 },
+          { size: 'm', price: 39.9, discount: 1, inventory: 12 },
+          { size: 'l', price: 59.9, discount: 1, inventory: 2 },
         ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/nabe_pot.jpg',
@@ -265,11 +265,11 @@ export const products = [
         color: 'Black',
         colorCode: '#000000',
         sizes: [
-          { size: 'xs', price: 79.9, inventory: 2 },
-          { size: 's', price: 79.9, inventory: 1 },
-          { size: 'm', price: 79.9, inventory: 5 },
-          { size: 'lg', price: 79.9, inventory: 2 },
-          { size: 'xl', price: 79.9, inventory: 22 },
+          { size: 'xs', price: 79.9, discount: 1, inventory: 2 },
+          { size: 's', price: 79.9, discount: 1, inventory: 1 },
+          { size: 'm', price: 79.9, discount: 1, inventory: 5 },
+          { size: 'l', price: 79.9, discount: 1, inventory: 2 },
+          { size: 'xl', price: 79.9, discount: 1, inventory: 22 },
         ],
 
         image:
@@ -279,11 +279,11 @@ export const products = [
         color: 'Green',
         colorCode: '#689282',
         sizes: [
-          { size: 'xs', price: 79.9, inventory: 8 },
-          { size: 's', price: 79.9, inventory: 21 },
-          { size: 'm', price: 79.9, inventory: 2 },
-          { size: 'lg', price: 79.9, inventory: 5 },
-          { size: 'xl', price: 79.9, inventory: 0 },
+          { size: 'xs', price: 79.9, discount: 1, inventory: 8 },
+          { size: 's', price: 79.9, discount: 1, inventory: 21 },
+          { size: 'm', price: 79.9, discount: 1, inventory: 2 },
+          { size: 'l', price: 79.9, discount: 1, inventory: 5 },
+          { size: 'xl', price: 79.9, discount: 1, inventory: 0 },
         ],
 
         image:

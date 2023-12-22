@@ -38,8 +38,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           <Rating value={productRating} precision={0.5} readOnly />
         </div>
         <div>{reviews.length} reviews</div>
-        <div className='font-semibold'>
-          {formatPrice(colors[0].sizes[0]?.price)}
+        <div
+          className={`font-semibold ${
+            colors[0].sizes[0]?.discount < 1 && 'text-rose-500'
+          }`}
+        >
+          {formatPrice(
+            colors[0].sizes[0]?.price * colors[0].sizes[0]?.discount
+          )}
         </div>
       </div>
     </div>

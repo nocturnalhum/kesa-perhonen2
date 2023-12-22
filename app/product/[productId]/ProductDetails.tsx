@@ -4,6 +4,7 @@ import Button from '@/app/components/Button';
 import ProductImage from '@/app/components/products/ProductImage';
 import SetColor from '@/app/components/products/SetColor';
 import SetQuantity from '@/app/components/products/SetQuantity';
+import { formatPrice } from '@/utils/formatPrice';
 import { Rating, dividerClasses } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
@@ -19,16 +20,17 @@ export type CartProductType = {
   name: string;
   description: string;
   category: string;
-  selectedImg: SelectedImgType;
+  selectedItem: SelectedItemType;
   quantity: number;
 };
 
-export type SelectedImgType = {
+export type SelectedItemType = {
   color: string;
   colorCode: string;
   image: string;
   size: string;
   price: number;
+  discount: number;
   inventory: number;
 };
 
@@ -38,22 +40,23 @@ const Horizontal = () => {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const [isProductInCart, setIsProductInCart] = useState(false);
+
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product?.id,
     name: product?.name,
     description: product?.description,
     category: product?.category,
-    selectedImg: {
+    selectedItem: {
       color: product?.colors[0].color,
       colorCode: product?.colors[0].colorCode,
       image: product?.colors[0].image,
       size: product?.colors[0]?.sizes[0]?.size,
       price: product?.colors[0].sizes[0]?.price,
+      discount: product?.colors[0].sizes[0]?.discount,
       inventory: product?.colors[0].sizes[0]?.inventory,
     },
     quantity: 1,
   });
-  const [productSize, setProductSize] = useState(cartProduct.selectedImg.size);
 
   const router = useRouter();
 
@@ -65,14 +68,21 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     (value: any) => {
       const { color, colorCode, image, sizes } = value;
       const result = sizes.filter(
-        (item: any) => item.size === cartProduct.selectedImg.size
+        (item: any) => item.size === cartProduct.selectedItem.size
       );
-      const { size, price, inventory } = result[0];
-      console.log('ColorSelect', size, price, inventory);
+      const { size, price, inventory, discount } = result[0];
       setCartProduct((prev) => {
         return {
           ...prev,
-          selectedImg: { color, colorCode, image, size, price, inventory },
+          selectedItem: {
+            color,
+            colorCode,
+            image,
+            size,
+            price,
+            discount,
+            inventory,
+          },
           quantity: 1,
         };
       });
@@ -81,19 +91,26 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   );
 
   const handleSizeSelect = useCallback((value: any) => {
-    const { size, price, inventory } = value;
+    const { size, price, inventory, discount } = value;
+
     setCartProduct((prev) => {
       return {
         ...prev,
-        selectedImg: { ...prev.selectedImg, size, price, inventory },
+        selectedItem: {
+          ...prev.selectedItem,
+          size,
+          price,
+          discount,
+          inventory,
+        },
       };
     });
   }, []);
 
   const handleQtyIncrease = useCallback(() => {
-    if (cartProduct.quantity >= cartProduct.selectedImg.inventory) {
+    if (cartProduct.quantity >= cartProduct.selectedItem.inventory) {
       return toast.error(
-        `Sorry. We only have ${cartProduct.selectedImg.inventory} in stock.`
+        `Sorry. We only have ${cartProduct.selectedItem.inventory} in stock.`
       );
     }
     setCartProduct((prev) => {
@@ -112,8 +129,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       };
     });
   }, []);
-
-  console.log('CartProduct', cartProduct);
 
   return (
     <div className='grid grid-cols-1 tablet:grid-cols-2 gap-12'>
@@ -134,6 +149,28 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         <div className='text-justify'>{product?.description}</div>
         <Horizontal />
         <div className='space-y-3'>
+          {/* ========<<< Price >>>========================================= */}
+          <div className={`flex gap-4 font-bold text-lg text-slate-600`}>
+            <div
+              className={`${
+                cartProduct.selectedItem.discount < 1 && 'line-through'
+              }`}
+            >
+              {formatPrice(cartProduct.selectedItem.price)}
+            </div>
+            <div
+              className={`${
+                cartProduct.selectedItem.discount < 1
+                  ? 'text-rose-500'
+                  : 'hidden'
+              }`}
+            >
+              {formatPrice(
+                cartProduct.selectedItem.price *
+                  cartProduct.selectedItem.discount
+              )}
+            </div>
+          </div>
           {/* ========<<< Category >>>========================================= */}
           <div className='capitalize'>
             <span className='font-semibold'>category:</span>
@@ -142,15 +179,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           {/* ========<<< Size >>>============================================ */}
           <div className='font-semibold capitalize'>
             size:
-            <span className='font-normal ml-2'>
-              {cartProduct.selectedImg.size === 'os'
+            <span className='font-normal uppercase ml-2'>
+              {cartProduct.selectedItem.size === 'os'
                 ? 'one-size'
-                : cartProduct.selectedImg.size}
+                : cartProduct.selectedItem.size}
             </span>
             <div className='flex gap-1.5 mt-1'>
               {product?.colors
                 .filter(
-                  (item: any) => item.color === cartProduct.selectedImg.color
+                  (item: any) => item.color === cartProduct.selectedItem.color
                 )
                 .map((colorItem: any) =>
                   colorItem.sizes.map((sizeItem: any, index: number) => (
@@ -158,7 +195,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                       key={index}
                       onClick={() => handleSizeSelect(sizeItem)}
                       className={`flex justify-center items-center uppercase border-[1px] rounded-full w-7  aspect-square text-xs cursor-pointer ${
-                        cartProduct.selectedImg.size === sizeItem.size
+                        cartProduct.selectedItem.size === sizeItem.size
                           ? 'border-slate-400'
                           : 'border-slate-200'
                       }`}
@@ -172,15 +209,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           {/* ========<<< In Stock >>>========================================= */}
           <div
             className={`capitalize ${
-              cartProduct.selectedImg.inventory > 5
+              cartProduct.selectedItem.inventory > 5
                 ? 'text-teal-400'
                 : 'text-rose-400'
             }`}
           >
-            {cartProduct.selectedImg.inventory > 5
+            {cartProduct.selectedItem.inventory > 5
               ? 'in stock'
-              : cartProduct.selectedImg.inventory > 0
-              ? `Only ${cartProduct.selectedImg.inventory} left in stock.`
+              : cartProduct.selectedItem.inventory > 0
+              ? `Only ${cartProduct.selectedItem.inventory} left in stock.`
               : 'out of stock'}
           </div>
         </div>
@@ -238,9 +275,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             <div className='max-w-xs'>
               <Button
                 outline
-                disabled={cartProduct.selectedImg.inventory < 1}
+                disabled={cartProduct.selectedItem.inventory < 1}
                 label={
-                  cartProduct.selectedImg.inventory < 1
+                  cartProduct.selectedItem.inventory < 1
                     ? 'Out of Stock'
                     : 'Add To Cart'
                 }
