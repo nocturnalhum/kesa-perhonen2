@@ -4,14 +4,12 @@ export const products = [
     name: 'ribbed beanie',
     description:
       'Cotton material is used on the inside of the forehead area for less itchiness because of wool. You can easily wash it in your home washing machine.',
-    price: 39.9,
-    brand: 'muji',
     category: 'hats',
-    items: [
+    colors: [
       {
         color: 'sand beige',
         colorCode: '#e2e1e1',
-        inStock: 10,
+        sizes: [{ size: 'os', price: 19.9, inventory: 10 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sand_700.jpg',
@@ -19,7 +17,7 @@ export const products = [
       {
         color: 'gray',
         colorCode: '#7a7c7c',
-        inStock: 0,
+        sizes: [{ size: 'os', price: 19.9, inventory: 0 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/gray_700.jpg',
@@ -27,7 +25,7 @@ export const products = [
       {
         color: 'smokey green',
         colorCode: '#6b8e8a',
-        inStock: 12,
+        sizes: [{ size: 'os', price: 19.9, inventory: 12 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/green_700.jpg',
@@ -35,7 +33,7 @@ export const products = [
       {
         color: 'dark mustard',
         colorCode: '#c4841e',
-        inStock: 5,
+        sizes: [{ size: 'os', price: 19.9, inventory: 5 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/mustard_700.jpg',
@@ -43,7 +41,7 @@ export const products = [
       {
         color: 'black',
         colorCode: '#000000',
-        inStock: 2,
+        sizes: [{ size: 'os', price: 19.9, inventory: 2 }],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/black_700.jpg',
@@ -56,28 +54,44 @@ export const products = [
     name: "Men's Merino Wool Cable Pattern Crew Neck Sweater",
     description:
       "Keep warm in style with this men's Merino wool cable pattern crew neck sweater. This high-quality sweater features a warm knit with a traditional pattern knitted on for texture. Perfect for any cold weather day.",
-    price: 99.9,
-    brand: 'muji',
     category: 'sweater',
-    items: [
+    colors: [
       {
         color: 'natural',
         colorCode: '#f7f3e3 ',
-        inStock: 22,
+        sizes: [
+          { size: 'xs', price: 99.9, inventory: 2 },
+          { size: 's', price: 99.9, inventory: 21 },
+          { size: 'm', price: 99.9, inventory: 12 },
+          { size: 'lg', price: 99.9, inventory: 2 },
+          { size: 'xl', price: 99.9, inventory: 22 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sweater_white_700.jpg',
       },
       {
         color: 'gray',
         colorCode: '#a3a2a0',
-        inStock: 8,
+        sizes: [
+          { size: 'xs', price: 99.9, inventory: 5 },
+          { size: 's', price: 99.9, inventory: 3 },
+          { size: 'm', price: 99.9, inventory: 2 },
+          { size: 'lg', price: 99.9, inventory: 6 },
+          { size: 'xl', price: 99.9, inventory: 12 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sweater_gray_700.jpg',
       },
       {
         color: 'black',
         colorCode: '#000000',
-        inStock: 2,
+        sizes: [
+          { size: 'xs', price: 99.9, inventory: 7 },
+          { size: 's', price: 99.9, inventory: 11 },
+          { size: 'm', price: 99.9, inventory: 2 },
+          { size: 'lg', price: 99.9, inventory: 22 },
+          { size: 'xl', price: 99.9, inventory: 12 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/sweater_black_700.jpg',
       },
@@ -89,7 +103,7 @@ export const products = [
         productId: '64a4ebe300900d44bb50628a',
         rating: 5,
         title: 'Very good quality sweater love it',
-        comment: `Beautiful fleece! Pls don't mind the first comment. I was pleasantly surprise by the quality of the article definitely not worth the price!`,
+        comment: `Beautiful sweater! Pls don't mind the first comment. I was pleasantly surprise by the quality of the article definitely worth the price!`,
         createdDate: '2023-07-06T06:08:33.067Z',
         user: {
           id: '6475af156bad4917456e6e1e',
@@ -110,7 +124,7 @@ export const products = [
         rating: 2,
         title: 'Too big',
         comment:
-          "I think this is not a small sized.. maybe it would be a labeling issue. It's too big so it's like a blanket than jacket",
+          "I think this is not a small sized.. maybe it would be a labeling issue. It's too big so it's like a blanket than sweater",
         createdDate: '2023-07-06T06:08:33.067Z',
         user: {
           id: '6475af156bad4917456e6e1e',
@@ -131,28 +145,44 @@ export const products = [
     name: "Women's High Gauge Wool Crew Neck Cardigan ",
     description:
       'Warm and soft sweater made from pill-resistant wool yarn. Shrink-resistant and machine-washable.',
-    price: 49.9,
-    brand: 'Muji',
     category: "Women's tops",
-    items: [
+    colors: [
       {
         color: 'Gray',
         colorCode: '#a3a2a0',
-        inStock: 2,
+        sizes: [
+          { size: 'xs', price: 49.9, inventory: 2 },
+          { size: 's', price: 49.9, inventory: 6 },
+          { size: 'm', price: 49.9, inventory: 5 },
+          { size: 'lg', price: 49.9, inventory: 11 },
+          { size: 'xl', price: 49.9, inventory: 16 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/cardigan_gray.jpg',
       },
       {
         color: 'Blue',
         colorCode: '#243c6d',
-        inStock: 0,
+        sizes: [
+          { size: 'xs', price: 49.9, inventory: 0 },
+          { size: 's', price: 49.9, inventory: 1 },
+          { size: 'm', price: 49.9, inventory: 5 },
+          { size: 'lg', price: 49.9, inventory: 12 },
+          { size: 'xl', price: 49.9, inventory: 7 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/cardigan_blue.jpg',
       },
       {
         color: 'Red',
         colorCode: '#900C3F',
-        inStock: 12,
+        sizes: [
+          { size: 'xs', price: 49.9, inventory: 2 },
+          { size: 's', price: 49.9, inventory: 3 },
+          { size: 'm', price: 49.9, inventory: 7 },
+          { size: 'lg', price: 49.9, inventory: 6 },
+          { size: 'xl', price: 49.9, inventory: 15 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/cardigan_red.jpg',
       },
@@ -208,14 +238,16 @@ export const products = [
     description:
       'This 1600ml Japanese-style ceramic pot is ideal for serving 2-3 people. Perfect for making hot soup, rice, or having a family hot pot.',
     price: 70,
-    brand: 'Hakusan',
     category: 'Cookware',
-    items: [
+    colors: [
       {
         color: 'Natural',
         colorCode: ' #ffffff',
-        inStock: 7,
-
+        sizes: [
+          { size: 's', price: 29.9, inventory: 21 },
+          { size: 'm', price: 39.9, inventory: 12 },
+          { size: 'lg', price: 59.9, inventory: 2 },
+        ],
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/nabe_pot.jpg',
       },
@@ -227,14 +259,18 @@ export const products = [
     name: "Women's Kapok Blend Double Gauze Long Sleeve Dress",
     description:
       'An easy-to-wear dress that is light and comfortable, perfect for spring.\n\nThe soft gauze material is made from a blend of organic cotton and kapok, an environmentally friendly plant grown without pesticides. By using a fabric that mixes kapok with cotton, it is softer and lighter than conventional 100% cotton.\n\n[What is Kapok]\nThe fibre harvested from kapok nuts is a material with minimal environmental impact that can be cultivated with little fertilizer and water without pesticides. Because the fibre inside is hollow, it is light and contains a lot of air.',
-    price: 79.9,
-    brand: 'Nerunsa',
     category: 'Dresses',
-    items: [
+    colors: [
       {
         color: 'Black',
         colorCode: '#000000',
-        inStock: 21,
+        sizes: [
+          { size: 'xs', price: 79.9, inventory: 2 },
+          { size: 's', price: 79.9, inventory: 1 },
+          { size: 'm', price: 79.9, inventory: 5 },
+          { size: 'lg', price: 79.9, inventory: 2 },
+          { size: 'xl', price: 79.9, inventory: 22 },
+        ],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/dress_black.jpg',
@@ -242,7 +278,13 @@ export const products = [
       {
         color: 'Green',
         colorCode: '#689282',
-        inStock: 2,
+        sizes: [
+          { size: 'xs', price: 79.9, inventory: 8 },
+          { size: 's', price: 79.9, inventory: 21 },
+          { size: 'm', price: 79.9, inventory: 2 },
+          { size: 'lg', price: 79.9, inventory: 5 },
+          { size: 'xl', price: 79.9, inventory: 0 },
+        ],
 
         image:
           'https://kesa-perhonen.s3.ca-central-1.amazonaws.com/dress_green.jpg',

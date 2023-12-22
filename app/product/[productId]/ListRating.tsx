@@ -15,8 +15,8 @@ const ListRating: React.FC<ListRatingProps> = ({ product }) => {
     <div>
       <Heading title='Product Review' />
       <div className='text-sm mt-2'>
-        {product.reviews &&
-          product.reviews.map((review: any) => {
+        {product?.reviews &&
+          product?.reviews.map((review: any) => {
             return (
               <div key={review.id} className='max-w-xs'>
                 <div className='flex gap-2 items-center'>

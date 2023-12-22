@@ -11,7 +11,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
-  const { name, items, price, reviews } = data;
+  const { name, colors, reviews } = data;
   const router = useRouter();
 
   const productRating =
@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
       <div className='flex flex-col items-center w-full'>
         <div className='relative w-full aspect-square overflow-hidden'>
           <Image
-            src={items[0].image}
+            src={colors[0].image}
             alt={name}
             height={600}
             width={600}
@@ -38,7 +38,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           <Rating value={productRating} precision={0.5} readOnly />
         </div>
         <div>{reviews.length} reviews</div>
-        <div className='font-semibold'>{formatPrice(price)}</div>
+        <div className='font-semibold'>
+          {formatPrice(colors[0].sizes[0]?.price)}
+        </div>
       </div>
     </div>
   );

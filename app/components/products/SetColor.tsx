@@ -20,9 +20,15 @@ const SetColor: React.FC<SetColorProps> = ({
   return (
     <div className='flex gap-4 items-center'>
       <div>
-        <span className='font-bold uppercase'>color:</span>
-        <div className='flex gap-1'>
-          {items.map((image) => {
+        <span className='font-bold uppercase'>
+          color:
+          <span className='font-normal capitalize ml-2'>
+            {cartProduct.selectedImg.color}
+          </span>
+        </span>
+        <div className='flex gap-1 mt-0.5'>
+          {/* Map out different color radio buttons to select item color */}
+          {items?.map((image) => {
             return (
               <div
                 onClick={() => handleColorSelect(image)}

@@ -20,7 +20,8 @@ const ProductImage: React.FC<ProductImageProps> = ({
     <div className='grid grid-cols-6 gap-2 h-full'>
       <div className='border cursor-pointer h-fit'>
         <div className='flex flex-col items-center'>
-          {product.items.map((image: SelectedImgType) => {
+          {/* Map out different colors of item */}
+          {product?.colors.map((image: SelectedImgType) => {
             return (
               <div
                 key={image.color}
@@ -31,6 +32,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
                     : 'border-none'
                 }`}
               >
+                {/* Sidebar with different color variations of item */}
                 <Image
                   src={image.image}
                   alt={image.color}
@@ -44,9 +46,10 @@ const ProductImage: React.FC<ProductImageProps> = ({
         </div>
       </div>
       <div className='col-span-5 aspect-square'>
+        {/* Display large color image of item selected for adding to cart */}
         <Image
           src={cartProduct.selectedImg.image}
-          alt={cartProduct.name}
+          alt={cartProduct.name + ' ' + cartProduct.selectedImg.color}
           height={800}
           width={600}
           className='w-full h-full object-contain'
