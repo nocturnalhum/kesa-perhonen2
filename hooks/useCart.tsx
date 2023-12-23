@@ -1,6 +1,7 @@
 'use client';
 
 import { CartProductType } from '@/app/product/[productId]/ProductDetails';
+import toast from 'react-hot-toast';
 import {
   createContext,
   useCallback,
@@ -38,7 +39,6 @@ export const CartContextProvider = (props: Props) => {
     }
   }, []);
 
-  console.log('shoppingCart', shoppingCart);
   // ==========================================================================
   // ========<<< Handle Add Product to Cart >>>================================
   // ==========================================================================
@@ -58,6 +58,7 @@ export const CartContextProvider = (props: Props) => {
 
       return updatedCart;
     });
+    toast.success('Product added to cart');
   }, []);
 
   const value = {

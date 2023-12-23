@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import NavBar from './components/nav/NavBar';
 import Footer from './components/footer/Footer';
 import CartProvider from '@/providers/CartProvider';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,6 +25,11 @@ export default function RootLayout({
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
       <body className={`${inter.className} text-slate-700`}>
+        <Toaster
+          toastOptions={{
+            style: { background: 'rgb(51 65 85)', color: '#fff' },
+          }}
+        />
         <CartProvider>
           <div className='flex flex-col min-h-screen'>
             <NavBar />
