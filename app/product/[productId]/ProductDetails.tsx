@@ -4,8 +4,9 @@ import Button from '@/app/components/Button';
 import ProductImage from '@/app/components/products/ProductImage';
 import SetColor from '@/app/components/products/SetColor';
 import SetQuantity from '@/app/components/products/SetQuantity';
+import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/utils/formatPrice';
-import { Rating, dividerClasses } from '@mui/material';
+import { Rating } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -39,7 +40,11 @@ const Horizontal = () => {
 };
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+  const { shoppingCart, handleAddProductToCart } = useCart();
   const [isProductInCart, setIsProductInCart] = useState(false);
+  const router = useRouter();
+
+  console.log('shoppingCart', product);
 
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product?.id,
@@ -58,11 +63,31 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     quantity: 1,
   });
 
-  const router = useRouter();
+  useEffect(() => {
+    setIsProductInCart(false);
+    if (shoppingCart) {
+      const existingIndex = shoppingCart.findIndex(
+        (item) =>
+          item.id ===
+          `${cartProduct.id}-${cartProduct.selectedItem.colorCode}-${cartProduct.selectedItem.size}`
+      );
+      if (existingIndex > -1) {
+        setIsProductInCart(true);
+      }
+    }
+  }, [shoppingCart, cartProduct]);
+
+  // ==========================================================================
+  // ========<<< Calculate Product Rating >>>==================================
+  // ==========================================================================
 
   const productRating =
     product?.reviews?.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product?.reviews?.length;
+
+  // ==========================================================================
+  // ========<<< Handle Color Select >>>=======================================
+  // ==========================================================================
 
   const handleColorSelect = useCallback(
     (value: any) => {
@@ -90,6 +115,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     [cartProduct]
   );
 
+  // ==========================================================================
+  // ========<<< Handle Size Select >>>========================================
+  // ==========================================================================
+
   const handleSizeSelect = useCallback((value: any) => {
     const { size, price, inventory, discount } = value;
 
@@ -107,6 +136,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     });
   }, []);
 
+  // ==========================================================================
+  // ========<<< Handle Quantity Increase >>>==================================
+  // ==========================================================================
+
   const handleQtyIncrease = useCallback(() => {
     if (cartProduct.quantity >= cartProduct.selectedItem.inventory) {
       return toast.error(
@@ -121,6 +154,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     });
   }, [cartProduct]);
 
+  // ==========================================================================
+  // ========<<< Handle Quantity Decrease >>>==================================
+  // ==========================================================================
+
   const handleQtyDecrease = useCallback(() => {
     setCartProduct((prev) => {
       return {
@@ -130,6 +167,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     });
   }, []);
 
+  // ==========================================================================
+  // ==========================================================================
+  // ==========================================================================
+
   return (
     <div className='grid grid-cols-1 tablet:grid-cols-2 gap-12'>
       <ProductImage
@@ -138,18 +179,21 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         handleColorSelect={handleColorSelect}
       />
       <div className='flex flex-col gap-1 text-slate-500 text-sm'>
+        {/* ========<<< Product Name >>>======================================= */}
         <h2 className='text-3xl font-medium to-sky-700 capitalize'>
           {product?.name}
         </h2>
+        {/* ========<<< Rating >>>============================================= */}
         <div className='flex items-center gap-2'>
           <Rating value={productRating} precision={0.5} readOnly />
           <div>{product?.reviews.length} reviews</div>
         </div>
         <Horizontal />
+        {/* ========<<< Description >>>======================================== */}
         <div className='text-justify'>{product?.description}</div>
         <Horizontal />
         <div className='space-y-3'>
-          {/* ========<<< Price >>>========================================= */}
+          {/* ========<<< Price >>>============================================ */}
           <div className={`flex gap-4 font-bold text-lg text-slate-600`}>
             <div
               className={`${
@@ -224,7 +268,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         <Horizontal />
         {isProductInCart ? (
           <>
-            {/* ========<<< Color >>>======================================== */}
+            {/* ========<<< Set Color >>>====================================== */}
             <div>
               <SetColor
                 cartProduct={cartProduct}
@@ -247,7 +291,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               />
               <div
                 onClick={() => router.back()}
-                className='text-slate-500 flex items-center gap-1 mt-2 cursor-pointer'
+                className='text-slate-700 flex items-center gap-1 mt-2 cursor-pointer'
               >
                 <MdArrowBack />
                 <span>Continue Shopping</span>
@@ -264,6 +308,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               />
             </div>
             <Horizontal />
+            {/* ========<<< Set Quantity >>>=================================== */}
             <div>
               <SetQuantity
                 cartProduct={cartProduct}
@@ -272,6 +317,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               />
             </div>
             <Horizontal />
+            {/* ========<<< Add To Cart Button >>>============================= */}
             <div className='max-w-xs'>
               <Button
                 outline
@@ -281,7 +327,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                     ? 'Out of Stock'
                     : 'Add To Cart'
                 }
-                onClick={() => {}}
+                onClick={() => handleAddProductToCart(cartProduct)}
               />
             </div>
           </>
