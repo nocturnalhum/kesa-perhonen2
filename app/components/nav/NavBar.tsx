@@ -7,6 +7,7 @@ import { CiMenuBurger } from 'react-icons/ci';
 import { IoSearchOutline } from 'react-icons/io5';
 import Container from '../Container';
 import Categories from './Categories';
+import CartCount from './CartCount';
 
 const noto = Noto_Serif_JP({
   subsets: [],
@@ -69,7 +70,7 @@ const NavBar = () => {
             {/* =====<<< SHOPPING CART >>>======================================= */}
             <div className='flex'>
               <Link href='/cart' className='cursor-pointer'>
-                Cart
+                <CartCount />
               </Link>
               <div className='ml-3'>User</div>
             </div>

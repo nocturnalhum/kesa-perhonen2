@@ -12,9 +12,12 @@ import {
 
 type CartContextType = {
   cartTotalQty: number;
+  cartTotalAmount: number;
   shoppingCart: CartProductType[] | null;
   handleAddProductToCart: (product: CartProductType) => void;
   handleRemoveProductFromCart: (product: CartProductType) => void;
+  handleCartQtyIncrease: (product: CartProductType) => void;
+  handleCartQtyDecrease: (product: CartProductType) => void;
   handleClearCart: () => void;
 };
 
@@ -26,6 +29,7 @@ interface Props {
 
 export const CartContextProvider = (props: Props) => {
   const [cartTotalQty, setCartTotalQty] = useState(0);
+  const [cartTotalAmount, setCartTotalAmount] = useState(0);
   const [shoppingCart, setShoppingCart] = useState<CartProductType[] | null>(
     null
   );
@@ -33,6 +37,7 @@ export const CartContextProvider = (props: Props) => {
   // ==========================================================================
   // ========<<< Restore Shopping Cart from Local Storage >>>==================
   // ==========================================================================
+
   useEffect(() => {
     const cartItems: any = localStorage.getItem('shopCartItems');
     if (cartItems) {
@@ -42,8 +47,37 @@ export const CartContextProvider = (props: Props) => {
   }, []);
 
   // ==========================================================================
+  // ========<<< Update Shopping Cart Subtotal >>>=============================
+  // ==========================================================================
+  useEffect(() => {
+    const getTotals = () => {
+      if (shoppingCart) {
+        const { total, qty } = shoppingCart?.reduce(
+          (acc, item) => {
+            const itemTotal =
+              item.selectedItem.price *
+              item.selectedItem.discount *
+              item.quantity;
+            acc.total += itemTotal;
+            acc.qty += item.quantity;
+            return acc;
+          },
+          {
+            total: 0,
+            qty: 0,
+          }
+        );
+        setCartTotalQty(qty);
+        setCartTotalAmount(total);
+      }
+    };
+    getTotals();
+  }, [shoppingCart]);
+
+  // ==========================================================================
   // ========<<< Handle Add Product to Cart >>>================================
   // ==========================================================================
+
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     const cartProduct = {
       ...product,
@@ -66,6 +100,7 @@ export const CartContextProvider = (props: Props) => {
   // ==========================================================================
   // ========<<< Handle Remmove Cart Product >>>===============================
   // ==========================================================================
+
   const handleRemoveProductFromCart = useCallback(
     (product: CartProductType) => {
       if (shoppingCart) {
@@ -86,8 +121,65 @@ export const CartContextProvider = (props: Props) => {
   );
 
   // ==========================================================================
+  // ========<<< Handle Cart Qty Increase >>>==================================
+  // ==========================================================================
+  const handleCartQtyIncrease = useCallback(
+    (product: CartProductType) => {
+      let updatedCart;
+
+      if (product.quantity >= product.selectedItem.inventory) {
+        return toast.error(
+          `Sorry. We only have ${product.selectedItem.inventory} in stock.`
+        );
+      }
+
+      if (shoppingCart) {
+        updatedCart = [...shoppingCart];
+        const existingIndex = shoppingCart.findIndex(
+          (item) => item.id === product.id
+        );
+
+        if (existingIndex > -1) {
+          ++updatedCart[existingIndex].quantity;
+        }
+        setShoppingCart(updatedCart);
+        localStorage.setItem('shopCartItems', JSON.stringify(updatedCart));
+      }
+    },
+    [shoppingCart]
+  );
+
+  // ==========================================================================
+  // ========<<< Handle Cart Qty Decrease >>>==================================
+  // ==========================================================================
+  const handleCartQtyDecrease = useCallback(
+    (product: CartProductType) => {
+      let updatedCart;
+      if (product.quantity <= 1) {
+        return toast.error("Click 'Remove' to remove product.");
+      }
+
+      if (shoppingCart) {
+        updatedCart = [...shoppingCart];
+
+        const existingIndex = shoppingCart.findIndex(
+          (item) => item.id === product.id
+        );
+
+        if (existingIndex > -1) {
+          --updatedCart[existingIndex].quantity;
+        }
+        setShoppingCart(updatedCart);
+        localStorage.setItem('shopCartItems', JSON.stringify(updatedCart));
+      }
+    },
+    [shoppingCart]
+  );
+
+  // ==========================================================================
   // ========<<< Clear Cart >>>================================================
   // ==========================================================================
+
   const handleClearCart = useCallback(() => {
     setShoppingCart(null);
     setCartTotalQty(0);
@@ -97,11 +189,15 @@ export const CartContextProvider = (props: Props) => {
   // ==========================================================================
   // ========<<< CartContextProvider Values >>>================================
   // ==========================================================================
+
   const value = {
     cartTotalQty,
+    cartTotalAmount,
     shoppingCart,
     handleAddProductToCart,
     handleRemoveProductFromCart,
+    handleCartQtyIncrease,
+    handleCartQtyDecrease,
     handleClearCart,
   };
 
