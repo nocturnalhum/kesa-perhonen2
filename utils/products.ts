@@ -58,7 +58,7 @@ export const products = [
     colors: [
       {
         color: 'natural',
-        colorCode: '#f7f3e3 ',
+        colorCode: '#f7f3e3',
         sizes: [
           { size: 'xs', price: 99.9, discount: 0.8, inventory: 2 },
           { size: 's', price: 99.9, discount: 0.8, inventory: 21 },

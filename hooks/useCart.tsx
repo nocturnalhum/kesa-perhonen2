@@ -14,6 +14,8 @@ type CartContextType = {
   cartTotalQty: number;
   shoppingCart: CartProductType[] | null;
   handleAddProductToCart: (product: CartProductType) => void;
+  handleRemoveProductFromCart: (product: CartProductType) => void;
+  handleClearCart: () => void;
 };
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -61,10 +63,46 @@ export const CartContextProvider = (props: Props) => {
     toast.success('Product added to cart');
   }, []);
 
+  // ==========================================================================
+  // ========<<< Handle Remmove Cart Product >>>===============================
+  // ==========================================================================
+  const handleRemoveProductFromCart = useCallback(
+    (product: CartProductType) => {
+      if (shoppingCart) {
+        const filteredCartProducts = shoppingCart.filter(
+          (item) =>
+            item.id !== product.id ||
+            item.selectedItem.color !== product.selectedItem.color
+        );
+        setShoppingCart(filteredCartProducts);
+        toast.success('Product removed');
+        localStorage.setItem(
+          'shopCartItems',
+          JSON.stringify(filteredCartProducts)
+        );
+      }
+    },
+    [shoppingCart]
+  );
+
+  // ==========================================================================
+  // ========<<< Clear Cart >>>================================================
+  // ==========================================================================
+  const handleClearCart = useCallback(() => {
+    setShoppingCart(null);
+    setCartTotalQty(0);
+    localStorage.setItem('shopCartItems', JSON.stringify(null));
+  }, []);
+
+  // ==========================================================================
+  // ========<<< CartContextProvider Values >>>================================
+  // ==========================================================================
   const value = {
     cartTotalQty,
     shoppingCart,
     handleAddProductToCart,
+    handleRemoveProductFromCart,
+    handleClearCart,
   };
 
   return <CartContext.Provider value={value} {...props} />;
