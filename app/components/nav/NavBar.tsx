@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { Noto_Serif_JP } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,7 +16,8 @@ const noto = Noto_Serif_JP({
 });
 
 const NavBar = async () => {
-  const currentUser = getCurrentUser();
+  // const currentUser = getCurrentUser();
+
   return (
     <header className='sticky w-full bg-slate-50 z-30 shadow-sm'>
       <Container>
