@@ -52,7 +52,7 @@ const RegisterForm = () => {
           }
         });
       })
-      .catch(() => toast.error('Something went wrong'))
+      .catch(() => toast.error('Error on submit'))
       .finally(() => {
         data.password = '';
         data.confirmPassword = '';

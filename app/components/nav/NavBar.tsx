@@ -8,13 +8,17 @@ import { IoSearchOutline } from 'react-icons/io5';
 import Container from '../Container';
 import Categories from './Categories';
 import CartCount from './CartCount';
+import UserMenu from './UserMenu';
+import { getCurrentUser } from '@/actions/getCurrentUser';
 
 const noto = Noto_Serif_JP({
   subsets: [],
   weight: ['600'],
 });
 
-const NavBar = () => {
+const NavBar = async () => {
+  const currentUser = await getCurrentUser();
+
   return (
     <header className='sticky w-full bg-slate-50 z-30 shadow-sm'>
       <Container>
@@ -72,7 +76,9 @@ const NavBar = () => {
               <Link href='/cart' className='cursor-pointer'>
                 <CartCount />
               </Link>
-              <div className='ml-3'>User</div>
+              <div className='ml-3'>
+                <UserMenu currentUser={currentUser} />
+              </div>
             </div>
           </div>
           {/* =====<<< SHOPPING CATEGORIES >>>================================== */}

@@ -13,7 +13,7 @@ export default function HeroBanner() {
             Enjoy discounts on selected items
           </p>
           <p className='text-2xl laptop:text-5xl text-yellow-400 font-bold uppercase'>
-            get 50% off
+            get 20% off
           </p>
         </div>
         <div className='relative w-1/3 aspect-video'>
