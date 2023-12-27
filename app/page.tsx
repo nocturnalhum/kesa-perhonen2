@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { Metadata } from 'next';
 import Container from './components/Container';
 import HeroBanner from './components/HeroBanner';

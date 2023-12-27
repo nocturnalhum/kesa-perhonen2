@@ -1,7 +1,6 @@
 import { Noto_Serif_JP } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { GoChevronDown } from 'react-icons/go';
 import { CiMenuBurger } from 'react-icons/ci';
 import { IoSearchOutline } from 'react-icons/io5';
@@ -17,8 +16,7 @@ const noto = Noto_Serif_JP({
 });
 
 const NavBar = async () => {
-  const currentUser = await getCurrentUser();
-
+  const currentUser = getCurrentUser();
   return (
     <header className='sticky w-full bg-slate-50 z-30 shadow-sm'>
       <Container>
@@ -77,7 +75,7 @@ const NavBar = async () => {
                 <CartCount />
               </Link>
               <div className='ml-3'>
-                <UserMenu currentUser={currentUser} />
+                <UserMenu />
               </div>
             </div>
           </div>

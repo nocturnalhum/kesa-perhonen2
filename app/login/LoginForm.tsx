@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Heading from '../components/Heading';

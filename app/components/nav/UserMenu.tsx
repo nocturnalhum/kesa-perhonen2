@@ -7,12 +7,9 @@ import MenuItem from './MenuItem';
 import { signOut } from 'next-auth/react';
 import BackDrop from './BackDrop';
 import { SafeUser } from '@/types';
+import { getCurrentUser } from '@/actions/getCurrentUser';
 
-interface UserMenuProps {
-  currentUser: SafeUser | undefined | null;
-}
-
-const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -30,7 +27,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         </div>
         {isOpen && (
           <div className='absolute rounded-md shadow-md w-[170px] bg-white overflow-hidden top-12 right-0 text-sm flex flex-col cursor-pointer'>
-            {currentUser ? (
+            {true ? (
               <div>
                 <Link href='/orders'>
                   <MenuItem onClick={toggleOpen}>Your Orders</MenuItem>
