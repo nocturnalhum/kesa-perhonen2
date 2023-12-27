@@ -16,7 +16,7 @@ const noto = Noto_Serif_JP({
 });
 
 const NavBar = async () => {
-  // const currentUser = getCurrentUser();
+  const currentUser = await getCurrentUser();
 
   return (
     <header className='sticky w-full bg-slate-50 z-30 shadow-sm'>
@@ -76,7 +76,7 @@ const NavBar = async () => {
                 <CartCount />
               </Link>
               <div className='ml-3'>
-                <UserMenu />
+                <UserMenu currentUser={currentUser} />
               </div>
             </div>
           </div>

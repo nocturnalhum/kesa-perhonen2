@@ -1,5 +1,4 @@
 import React from 'react';
-
 interface MenuItemProps {
   children: React.ReactNode;
   onClick: () => void;

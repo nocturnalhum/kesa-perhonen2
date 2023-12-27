@@ -4,6 +4,8 @@ import HeroBanner from './components/HeroBanner';
 import { products } from '@/utils/products';
 import ProductCard from './components/products/ProductCard';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'kesä perhonen | Home Goods | Apparel | Gifts Store',
 };

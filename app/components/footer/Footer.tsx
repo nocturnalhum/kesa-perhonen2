@@ -7,6 +7,7 @@ import {
   AiFillYoutube,
 } from 'react-icons/ai';
 import Container from '../Container';
+
 import { categories } from '@/utils/categories';
 
 const Footer = () => {
