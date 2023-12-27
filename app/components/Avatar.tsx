@@ -16,15 +16,15 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
           <Image
             src={src}
             alt='Avatar'
-            className='rounded-full'
             height={50}
             width={50}
+            className='rounded-full'
           />
         </div>
       </>
     );
   }
-  return <FaUserCircle size={32} className='text-gray-400' />;
+  return <FaUserCircle size={32} className='text-gray-400 w-[40px]' />;
 };
 
 export default Avatar;

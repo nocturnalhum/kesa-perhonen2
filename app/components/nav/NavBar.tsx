@@ -71,7 +71,7 @@ const NavBar = async () => {
             </div>
 
             {/* =====<<< SHOPPING CART >>>======================================= */}
-            <div className='flex'>
+            <div className='flex items-center'>
               <Link href='/cart' className='cursor-pointer'>
                 <CartCount />
               </Link>

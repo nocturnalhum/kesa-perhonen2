@@ -7,13 +7,16 @@ import MenuItem from './MenuItem';
 import { signOut } from 'next-auth/react';
 import BackDrop from './BackDrop';
 import { SafeUser } from '@/types';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 interface UserMenuProps {
-  currentUser: SafeUser | undefined | null;
+  currentUser: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -23,10 +26,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <>
       <div className='relative z-30'>
         <div
-          className='h-auto aspect-square cursor-pointer'
+          className='h-[35px] aspect-square cursor-pointer'
           onClick={toggleOpen}
         >
-          <Avatar />
+          <Avatar src={currentUser?.image} />
         </div>
         {isOpen && (
           <div className='absolute rounded-md shadow-md w-[170px] bg-white overflow-hidden top-12 right-0 text-sm flex flex-col cursor-pointer'>
@@ -42,7 +45,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem
                   onClick={() => {
                     toggleOpen();
-                    signOut();
+                    signOut({ callbackUrl: 'http://localhost:3000' });
+                    toast.success('Logged Out');
                   }}
                 >
                   Logout

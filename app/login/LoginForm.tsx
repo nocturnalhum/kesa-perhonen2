@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Heading from '../components/Heading';
@@ -10,10 +10,22 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import Button from '../components/Button';
 import Input from '../components/InputField';
+import { SafeUser } from '@/types';
 
-const LoginForm = () => {
+interface LoginFormProps {
+  currentUser: SafeUser | null;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push('/cart');
+      router.refresh();
+    }
+  });
 
   const {
     register,
@@ -41,6 +53,10 @@ const LoginForm = () => {
       }
     });
   };
+
+  if (currentUser) {
+    return <p className='text-center'>Logged In. Redirecting...</p>;
+  }
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
