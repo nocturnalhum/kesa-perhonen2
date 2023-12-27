@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Noto_Serif_JP } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
