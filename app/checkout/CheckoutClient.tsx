@@ -22,36 +22,40 @@ const CheckoutClient = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (shoppingCart) {
-      setLoading(true);
-      setError(false);
+    const fetchData = async () => {
+      if (shoppingCart) {
+        setLoading(true);
+        setError(false);
 
-      fetch('api/create-payment-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: shoppingCart,
-          payment_intent_id: paymentIntent,
-        }),
-      })
-        .then((res) => {
+        try {
+          const res = await fetch('/api/create-payment-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              items: shoppingCart,
+              payment_intent_id: paymentIntent,
+            }),
+          });
+
           setLoading(false);
+
           if (res.status === 401) {
             return router.push('/login');
           }
-          return res.json();
-        })
-        .then((data) => {
+
+          const data = await res.json();
           setClientSecret(data.paymentIntent.client_secret);
           handleSetPaymentIntent(data.paymentIntent.id);
-        })
-        .catch((error) => {
+        } catch (error) {
           setError(true);
-          console.log('Error in CheckoutClient: ', error);
+          console.error('Error in CheckoutClient: ', error);
           toast.error('Error in CheckoutClient');
-        });
-    }
-  }, [handleSetPaymentIntent, paymentIntent, router, shoppingCart]);
+        }
+      }
+    };
+
+    fetchData();
+  }, [shoppingCart, paymentIntent, router, handleSetPaymentIntent]);
 
   const options: StripeElementsOptions = {
     clientSecret,

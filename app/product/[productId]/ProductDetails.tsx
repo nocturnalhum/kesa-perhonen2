@@ -141,7 +141,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const handleQtyIncrease = useCallback(() => {
     if (cartProduct.quantity >= cartProduct.selectedItem.inventory) {
       return toast.error(
-        `Sorry. We only have ${cartProduct.selectedItem.inventory} in stock.`
+        `Sorry. We currently have ${cartProduct.selectedItem.inventory} in stock.`,
+        {
+          id: 'quantity_limit',
+          duration: 1000,
+        }
       );
     }
     setCartProduct((prev) => {

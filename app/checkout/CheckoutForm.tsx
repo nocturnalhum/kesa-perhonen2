@@ -17,7 +17,6 @@ interface CheckoutFormProps {
   clientSecret: string;
   handleSetPaymentSuccess: (value: boolean) => void;
 }
-
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
   clientSecret,
   handleSetPaymentSuccess,
@@ -33,31 +32,38 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     if (!stripe) return;
     if (!clientSecret) return;
     handleSetPaymentSuccess(false);
-  }, [stripe, clientSecret, handleSetPaymentSuccess]);
+  }, [stripe]);
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    try {
+      event.preventDefault();
+      if (!stripe || !elements) {
+        setIsLoading(false);
+        return;
+      }
 
-    if (!stripe || !elements) return;
-
-    setIsLoading(true);
-
-    stripe
-      .confirmPayment({
+      setIsLoading(true);
+      const result = await stripe.confirmPayment({
         elements,
         redirect: 'if_required',
-      })
-      .then((result) => {
-        if (!result.error) {
-          toast.success('Payment Success');
-
-          handleClearCart();
-          handleSetPaymentSuccess(true);
-          handleSetPaymentIntent(null);
-        }
-        setIsLoading(false);
       });
+
+      if (result.error) {
+        toast.error(`Payment Error: ${result.error.message}`);
+      } else {
+        toast.success('Checkout Success');
+        handleClearCart();
+        handleSetPaymentSuccess(true);
+        handleSetPaymentIntent(null);
+      }
+    } catch (error) {
+      console.error('Unexpected error during payment:', error);
+      toast.error('Unexpected error during payment. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit} id='payment-form'>
       <div className='mb-6'>

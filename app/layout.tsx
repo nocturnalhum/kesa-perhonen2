@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 import NavBar from './components/nav/NavBar';
 import Footer from './components/footer/Footer';
 import CartProvider from '@/providers/CartProvider';
-import { Toaster } from 'react-hot-toast';
+import { Toaster, useToasterStore } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
