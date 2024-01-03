@@ -55,7 +55,6 @@ model Order {
   paymentIntentId String @unique
   products CartProductType[]
   address Address?
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
 }
