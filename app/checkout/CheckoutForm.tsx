@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Heading from '../components/Heading';
-import Button from '../components/Button';
+import Button from '../components/formInputs/Button';
 
 interface CheckoutFormProps {
   clientSecret: string;

@@ -5,7 +5,7 @@ import { useCart } from '@/hooks/useCart';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import Heading from '../components/Heading';
-import Button from '../components/Button';
+import Button from '../components/formInputs/Button';
 import { formatPrice } from '@/utils/formatPrice';
 import { useRouter } from 'next/navigation';
 import ItemContent from './ItemContent';

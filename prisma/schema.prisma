@@ -42,6 +42,29 @@ model User {
 
   accounts          Account[]
   orders            Order[]
+  reviews           Review[]
+}
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  category String
+  isNew Boolean
+  items SelectedItemType[]
+  reviews Review[]
+}
+
+model Review {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String  @db.ObjectId
+  productId String  @db.ObjectId
+  rating Int
+  comment String
+  createdDate DateTime @default(now())
+  
+  product Product @relation(fields: [productId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Order {
@@ -72,6 +95,10 @@ type SelectedItemType {
   color String
   colorCode String
   image String
+  sizes SizeDetail[]
+}
+
+type SizeDetail {
   size String
   price Float
   discount Float

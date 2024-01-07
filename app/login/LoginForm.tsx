@@ -8,8 +8,8 @@ import { AiOutlineGoogle } from 'react-icons/ai';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import Button from '../components/Button';
-import Input from '../components/InputField';
+import Button from '../components/formInputs/Button';
+import Input from '../components/formInputs/InputField';
 import { SafeUser } from '@/types';
 
 interface LoginFormProps {

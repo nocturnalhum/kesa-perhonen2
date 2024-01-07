@@ -6,7 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { StripeElementsOptions, loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import Button from '../components/Button';
+import Button from '../components/formInputs/Button';
 import CheckoutForm from './CheckoutForm';
 
 const stripePromise = loadStripe(
